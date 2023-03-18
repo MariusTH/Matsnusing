@@ -1,84 +1,48 @@
-import 'dart:html';
-
 import 'package:flutter/material.dart';
+import "components/button.dart";
 
-class TutorialHome extends StatelessWidget {
+class DaySelector extends StatelessWidget {
   final Function callBack;
-  const TutorialHome({super.key, required this.callBack});
+  DaySelector({super.key, required this.callBack,});
 
   @override
   Widget build(BuildContext context) {
+    List<String> days = [
+      "Mandag",
+      "Tirsdag",
+      "Onsdag",
+      "Torsdag",
+      "Fredag",
+      "Lørdag",
+      "Søndag"
+    ];
+    List<Widget> buttons = [];
+    for (var day in days) {
+      buttons.add(
+        Container(
+          margin: const EdgeInsetsDirectional.fromSTEB(
+            20.0,
+            4.0,
+            20.0,
+            4.0
+          ),
+          child: SelectButton(
+            onPressed: () { 
+              this.callBack(day);
+            },
+            text: day,
+          ),
+        )
+      );
+    }
     // Scaffold is a layout for
     // the major Material Components.
     return Scaffold(
+      backgroundColor: Color(0xfffdefd5),
       // body is the majority of the screen.
       body: Center(
         child: Column(
-          children: [
-            TextButton(
-              style: ButtonStyle(
-                foregroundColor: MaterialStateProperty.all<Color>(Colors.blue),
-              ),
-              onPressed: () { 
-                this.callBack('Mandag');
-              },
-              child: Text('Mandag'),
-            ),
-            TextButton(
-              style: ButtonStyle(
-                foregroundColor: MaterialStateProperty.all<Color>(Colors.blue),
-              ),
-              onPressed: () { 
-                this.callBack('Tirsdag');
-              },
-              child: Text('Tirsdag'),
-            ),
-            TextButton(
-              style: ButtonStyle(
-                foregroundColor: MaterialStateProperty.all<Color>(Colors.blue),
-              ),
-              onPressed: () { 
-                this.callBack('Onsdag');
-              },
-              child: Text('Onsdag'),
-            ),
-            TextButton(
-              style: ButtonStyle(
-                foregroundColor: MaterialStateProperty.all<Color>(Colors.blue),
-              ),
-              onPressed: () { 
-                this.callBack('Torsdag');
-              },
-              child: Text('Torsdag'),
-            ),
-            TextButton(
-              style: ButtonStyle(
-                foregroundColor: MaterialStateProperty.all<Color>(Colors.blue),
-              ),
-              onPressed: () { 
-                this.callBack('Fredag');
-              },
-              child: Text('Fredag'),
-            ),
-            TextButton(
-              style: ButtonStyle(
-                foregroundColor: MaterialStateProperty.all<Color>(Colors.blue),
-              ),
-              onPressed: () { 
-                this.callBack('Lørdag');
-              },
-              child: Text('Lørdag'),
-            ),
-            TextButton(
-              style: ButtonStyle(
-                foregroundColor: MaterialStateProperty.all<Color>(Colors.blue),
-              ),
-              onPressed: () { 
-                this.callBack('Søndag');
-              },
-              child: Text('Søndag'),
-            ),
-          ],
+          children: buttons,
         ),
       ),
     );
