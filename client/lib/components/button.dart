@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../notifiers/dayNotifier.dart';
 
 TextStyle TXT_STYLE = const TextStyle(
   fontWeight: FontWeight.bold,
@@ -23,27 +25,78 @@ ButtonStyle BTN_STYLE = ButtonStyle(
   minimumSize: MaterialStateProperty.all<Size>(const Size(350.0, 60.0)),
 );
 
-class SelectButton extends TextButton {
+// class SelectButton extends TextButton {
+//   SelectButton({
+//     Key? key,
+//     required VoidCallback onPressed,
+//     String? text,
+//     TextStyle? textStyle,
+//     Color? backgroundColor,
+//     double? borderRadius,
+//   }) : super(
+//           key: key,
+//           onPressed: onPressed,
+//           child: Align(
+//             alignment: Alignment.centerLeft,
+//             child: Padding(
+//               padding: const EdgeInsets.symmetric(horizontal: 16.0),
+//               child: Text(
+//                 text!.toUpperCase(),
+//                 textAlign: TextAlign.start,
+//               )
+//             ),
+//           ),
+//           style: BTN_STYLE,
+//         );
+// }
+
+// help me create a selectbutton class that extends consumerwidget
+// and then use it in the dayselector class below
+class SelectButton extends ConsumerWidget {
+  final VoidCallback onPressed;
+  final String? text;
+  final TextStyle? textStyle;
+  final Color? backgroundColor;
+  final double? borderRadius;
   SelectButton({
-    Key? key,
-    required VoidCallback onPressed,
-    String? text,
-    TextStyle? textStyle,
-    Color? backgroundColor,
-    double? borderRadius,
-  }) : super(
-          key: key,
-          onPressed: onPressed,
-          child: Align(
-            alignment: Alignment.centerLeft,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              child: Text(
-                text!.toUpperCase(),
-                textAlign: TextAlign.start,
-              )
-            ),
+    required this.onPressed,
+    this.text,
+    this.textStyle,
+    this.backgroundColor,
+    this.borderRadius,
+  }) : super();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return Container(
+          margin: const EdgeInsetsDirectional.fromSTEB(
+            20.0,
+            4.0,
+            20.0,
+            4.0
           ),
-          style: BTN_STYLE,
+          child: TextButton(
+            onPressed: onPressed,
+            child: Align(
+              alignment: Alignment.centerLeft,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                child: Column(
+                  children: [
+                    Text(
+                      text!.toUpperCase(),
+                      textAlign: TextAlign.start,
+                    ),
+                    Text(
+                      ref.watch(daysProvider.notifier).getDay(text!)?.middag!.toUpperCase() ?? "",
+                      textAlign: TextAlign.start,
+                    ),
+                  ],
+                )
+              ),
+            ),
+            style: BTN_STYLE,
+          ),
         );
+  }
 }

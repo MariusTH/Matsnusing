@@ -3,6 +3,8 @@ import 'package:dio/dio.dart';
 import 'dart:convert';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'daySelector.dart';
+import 'models/day.dart';
+import 'notifiers/dayNotifier.dart';
 
 
 // We create a "provider", which will store a value (here "Hello world").
@@ -87,13 +89,21 @@ class _ChatPageState extends ConsumerState<ChatPage> {
       final response =  await Dio().post(url, data: body, options: headers);
 
       if (response.statusCode == 200) {
-        print('data: ${response.data}');
-        print('data string: ${response.toString()}');
-        final responseData = json.decode(response.toString());
-        print('Response: $responseData');
+        print(response.toString());
+        Map<String, dynamic> data = json.decode(response.toString());
+        // Access 
+        print(data);
+        print(data.keys);
+        List<dynamic> days = data['days'];
+        List<Day> ds = [];
+        for (var day in days) {
+          ds.add(Day.fromJson(day));
+        }
+        print(ds);
+        ref.read(daysProvider.notifier).updateDays(ds);
         setState(() {
           // Note TODO harden result.
-          _response = responseData['result'];
+          //_response = responseData['result'];
         });
       } else {
         print('Error generating response: ${response.statusMessage}');
@@ -121,7 +131,6 @@ class _ChatPageState extends ConsumerState<ChatPage> {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Text(helloWorld),
           Expanded(child: DaySelector(callBack: dayCallBack,)),
           Expanded(
             child: ListView(

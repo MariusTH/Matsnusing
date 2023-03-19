@@ -19,19 +19,11 @@ class DaySelector extends StatelessWidget {
     List<Widget> buttons = [];
     for (var day in days) {
       buttons.add(
-        Container(
-          margin: const EdgeInsetsDirectional.fromSTEB(
-            20.0,
-            4.0,
-            20.0,
-            4.0
-          ),
-          child: SelectButton(
+        SelectButton(
             onPressed: () { 
               this.callBack(day);
             },
             text: day,
-          ),
         )
       );
     }
