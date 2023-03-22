@@ -13,7 +13,7 @@ import 'notifiers/dayNotifier.dart';
 final helloWorldProvider = Provider((_) => 'Hello world');
 
 void main() async {
-  await dotenv.load(fileName: ".env");
+  await dotenv.load(fileName: ".envs");
   runApp(
     // For widgets to be able to read providers, we need to wrap the entire
     // application in a "ProviderScope" widget.
