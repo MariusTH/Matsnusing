@@ -13,7 +13,7 @@ import 'notifiers/dayNotifier.dart';
 final helloWorldProvider = Provider((_) => 'Hello world');
 
 void main() async {
-  await dotenv.load(fileName: ".envs");
+  await dotenv.load(fileName: ".env");
   runApp(
     // For widgets to be able to read providers, we need to wrap the entire
     // application in a "ProviderScope" widget.
@@ -87,7 +87,7 @@ class _ChatPageState extends ConsumerState<ChatPage> {
     var url = '$api_base/api/completion'; // Replace with your backend URL
     final body = json.encode({'days': days});
     final headers = Options(headers: {'Content-Type': 'application/json'});
-
+    print(url);
     try {
       final response =  await Dio().post(url, data: body, options: headers);
 
