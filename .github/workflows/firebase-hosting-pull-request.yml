@@ -25,7 +25,7 @@ jobs:
         env:
           API_BASE: ${{ secrets.API_BASE }}
         run: |
-          echo 'API_URL=${{ secrets.API_BASE }}' > .env
+          echo 'API_URL='$API_BASE > .env
           flutter pub get
           flutter config --enable-web
           flutter build web
