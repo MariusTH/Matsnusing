@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'dart:convert';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'daySelector.dart';
@@ -11,7 +12,8 @@ import 'notifiers/dayNotifier.dart';
 // By using a provider, this allows us to mock/override the value exposed.
 final helloWorldProvider = Provider((_) => 'Hello world');
 
-void main() {
+void main() async {
+  await dotenv.load(fileName: ".env");
   runApp(
     // For widgets to be able to read providers, we need to wrap the entire
     // application in a "ProviderScope" widget.
@@ -81,7 +83,8 @@ class _ChatPageState extends ConsumerState<ChatPage> {
     print(days);
   }
   Future<void> _generateResponse() async {
-    const url = 'http://localhost:3000/api/completion'; // Replace with your backend URL
+    var api_base = dotenv.env['API_URL'];
+    var url = '$api_base/api/completion'; // Replace with your backend URL
     final body = json.encode({'days': days});
     final headers = Options(headers: {'Content-Type': 'application/json'});
 
