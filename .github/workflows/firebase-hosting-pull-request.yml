@@ -23,7 +23,7 @@ jobs:
       - name: 'Build and Deploy'
         working-directory: ./client
         env:
-          API_BASE: ${{ secrets.API_BASE }}
+          API_BASE: ${{ env.API_BASE }}
         run: |
           echo 'API_URL='$API_BASE > .env
           cat .env
