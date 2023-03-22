@@ -4,12 +4,12 @@ on:
     branches:
       - master
     paths:
-      - folder/**
+      - client/**
   pull_request:
     branches:
       - master
     paths:
-      - folder/**
+      - client/**
   workflow_dispatch:
     
 jobs:
