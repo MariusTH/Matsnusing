@@ -22,8 +22,10 @@ jobs:
             channel: 'stable'
       - name: 'Build and Deploy'
         working-directory: ./client
+        env:
+          API_BASE: ${{ secrets.API_BASE }}
         run: |
-          echo 'API_URL=${secrets.GITHUB_TOKEN}' > .env
+          echo 'API_URL=${{ secrets.API_BASE }}' > .env
           flutter pub get
           flutter config --enable-web
           flutter build web
