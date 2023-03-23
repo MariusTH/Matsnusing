@@ -32,6 +32,8 @@ jobs:
           echo "b $API_BASE"
           echo "c $API_BASE_R"
           echo "d $API_BASE2"
+          echo "${{ secrets.API_BASE }}"
+          echo "${{ secrets.API_BASE }}" > .env
           echo "API_URL=https://matsnusing-gpt.onrender.com" > .env
           echo DONE
           ./build.sh
