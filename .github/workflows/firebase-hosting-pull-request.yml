@@ -24,7 +24,7 @@ jobs:
         working-directory: ./client
         env:
           API_BASE: ${{ env.API_BASE }}
-          API_BASE2: ${{ secret.API_BASE }}
+          API_BASE2: ${{ secrets.API_BASE }}
         run: |
           echo $API_BASE
           echo $API_BASE2
