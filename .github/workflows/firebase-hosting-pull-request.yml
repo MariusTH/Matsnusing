@@ -27,6 +27,7 @@ jobs:
           API_BASE2: ${{ secrets.API_BASE }}
         run: |
           echo TEST
+          echo "Repository variable : ${{ vars.REPOSITORY_VAR }}"
           echo "a $API_BASE"
           echo "b $API_BASE"
           echo "c $API_BASE_R"
