@@ -5,4 +5,4 @@ flutter pub get
 flutter config --enable-web
 echo $API_URL
 echo $TEST_ERT
-flutter build web --dart-define=SOME_VAR=$API_URL
+flutter build web --dart-define=API_TEST=$API_URL
