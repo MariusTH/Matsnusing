@@ -6,7 +6,6 @@
 
 ### build dev
 cd client
-cp .env.example .env
 flutter pub get
 flutter run
 
