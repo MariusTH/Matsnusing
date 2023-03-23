@@ -27,9 +27,10 @@ jobs:
           API_BASE2: ${{ secrets.API_BASE }}
         run: |
           echo TEST
-          echo $API_BASE
-          echo $API_BASE_R
-          echo $API_BASE2
+          echo "a $API_BASE"
+          echo "b $API_BASE"
+          echo "c $API_BASE_R"
+          echo "d $API_BASE2"
           echo 'API_URL='$API_BASE > .env
           echo DONE
           cat .env
