@@ -84,6 +84,8 @@ class _ChatPageState extends ConsumerState<ChatPage> {
   }
   Future<void> _generateResponse() async {
     var api_base = dotenv.env['API_URL'];
+    const SOME_VAR = String.fromEnvironment('API_TEST', defaultValue: 'http://localhost:3000');
+    print(SOME_VAR);
     var url = '$api_base/api/completion'; // Replace with your backend URL
     final body = json.encode({'days': days});
     final headers = Options(headers: {'Content-Type': 'application/json'});
