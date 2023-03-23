@@ -25,6 +25,7 @@ jobs:
         env:
           API_BASE_R: ${{ env.API_BASE }}
           API_URL: ${{ secrets.API_BASE }}
+          TEST_ERT: "gollygosh!"
         run: |
           echo TEST
           echo "Repository variable : ${{ vars.REPOSITORY_VAR }}"
@@ -32,8 +33,10 @@ jobs:
           echo "b $API_BASE"
           echo "c $API_BASE_R"
           echo "d $API_BASE2"
-          echo "${{ secrets.API_BASE }}"
+          echo "${{ secrets.API_URL }}"
           echo "${{ secrets.API_BASE }}" > .env
+          echo $TEST_ERT
+          echo "a test $TEST_ERT"
           echo "API_URL=https://matsnusing-gpt.onrender.com" > .env
           echo DONE
           ./build.sh
