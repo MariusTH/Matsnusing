@@ -75,7 +75,7 @@ app.post('/api/completion', async (req, res) => {
     
 function generatePrompt(time: string, food: string) {
     console.log(time);
-    return `Jeg vil ha middager for disse dagene ${time}, og ingen andre dager, bare disse dagene. Jeg liker ting som ${food}, men vil ha andre ting enn bare dette. Har du linker til oppskrifter legg de med. Gi meg resultatet i json format. Ett gyldig json format jeg kunne forventet hadde vært { "days": [{"dag": "mandag", "middag": "stekt skrei med ratatouille" ,"link": "https://www.matprat.no/oppskrifter/kos/stekt-skrei-med-ratatouille/", "tid":"60min"}]}`;
+    return `Jeg vil ha middager for disse dagene ${time}, og ingen andre dager, bare disse dagene. Jeg liker ting som ${food}, men vil ha andre ting enn bare dette. Har du linker til oppskrifter legg de med. Gi meg resultatet i json format. Ett gyldig json format jeg kunne forventet hadde vært { "days": [{"dag": "mandag", "middag": "stekt skrei med ratatouille" ,"link": "https://www.matprat.no/oppskrifter/kos/stekt-skrei-med-ratatouille/", "tid":"60min"}], "ingredients": ["2 skrei", "6 poteter", "oliven olje", "salt", "pepper"]}`;
 }
     
 

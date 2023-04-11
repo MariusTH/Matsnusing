@@ -1,19 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'dart:convert';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'daySelector.dart';
 import 'models/day.dart';
 import 'notifiers/dayNotifier.dart';
-
+import 'views/ingredients.dart';
 
 // We create a "provider", which will store a value (here "Hello world").
 // By using a provider, this allows us to mock/override the value exposed.
 final helloWorldProvider = Provider((_) => 'Hello world');
 
 void main() async {
-  await dotenv.load(fileName: ".env");
   runApp(
     // For widgets to be able to read providers, we need to wrap the entire
     // application in a "ProviderScope" widget.
@@ -73,6 +71,7 @@ class _ChatPageState extends ConsumerState<ChatPage> {
   final _foodController = TextEditingController();
   final _timeController = TextEditingController();
   String _response = '';
+  List<dynamic> _ingredients = [];
   var days = <String>[];
   dayCallBack(String day) {
     if(days.contains(day)) {
@@ -98,6 +97,7 @@ class _ChatPageState extends ConsumerState<ChatPage> {
         print(data);
         print(data.keys);
         List<dynamic> days = data['days'];
+        _ingredients = data['ingredients'];
         List<Day> ds = [];
         for (var day in days) {
           ds.add(Day.fromJson(day));
@@ -154,10 +154,28 @@ class _ChatPageState extends ConsumerState<ChatPage> {
             ),
             child: Column(
               children: [
-                IconButton(
-                  icon: Icon(Icons.send),
-                  onPressed: _generateResponse,
-                ), 
+                Row(
+                  children: [
+                    Expanded(
+                      child: IconButton(
+                        icon: Icon(Icons.send),
+                        onPressed: _generateResponse,
+                      ), 
+                    ),
+                    Expanded(
+                      child: IconButton(
+                        color: Colors.deepPurpleAccent,
+                        icon: Icon(Icons.send),
+                          onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => Ingredients(_ingredients)),
+                          );
+                        },
+                      ), 
+                    ),
+                  ],
+                ),
               ],
             ),
           ),
